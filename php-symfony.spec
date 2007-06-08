@@ -17,16 +17,20 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_phpsharedir	%{_datadir}/php
 
 %description
-Based on the best practices of web development, thoroughly tried on several active websites, symfony aims to speed up the creation and maintenance of web applications, and to replace the repetitive coding tasks by power, control and pleasure.
+Based on the best practices of web development, thoroughly tried on
+several active websites, symfony aims to speed up the creation and
+maintenance of web applications, and to replace the repetitive coding
+tasks by power, control and pleasure.
 
-Symfony provides a lot of features seamlessly integrated together, such as:
+Symfony provides a lot of features seamlessly integrated together,
+such as:
 - simple templating and helpers
 - cache management
 - smart URLs
 - scaffolding
 - multilingualism and I18N support
 - object model and MVC separation
-- Ajax support 
+- Ajax support
 - enterprise ready
 
 %prep
