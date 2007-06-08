@@ -1,3 +1,4 @@
+%include	/usr/lib/rpm/macros.php
 %define	sname	symfony
 Summary:	open-source PHP web framework
 Name:		php-%{sname}
@@ -8,6 +9,7 @@ Group:		Libraries
 Source0:	http://www.symfony-project.com/get/symfony-stable.tgz
 # Source0-md5:	13f22e83634dc8fc8ba8b52a582a4d74
 URL:		http://www.symfony-project.com/
+BuildRequires:	rpm-php-pearprov >= 4.4.2-11
 Requires:	php-common
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -37,7 +39,7 @@ install -d $RPM_BUILD_ROOT{%{_bindir},%{_phpsharedir}/%{sname}}
 mv doc/LICENSE doc/LICENSE.doc
 
 cp -a data lib $RPM_BUILD_ROOT%{_phpsharedir}/%{sname}
-ln -s %{_phpsharedir}/%{name}/data/bin/symfony $RPM_BUILD_ROOT%{_bindir}/%{sname}
+ln -s %{_phpsharedir}/%{sname}/data/bin/symfony $RPM_BUILD_ROOT%{_bindir}/%{sname}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
