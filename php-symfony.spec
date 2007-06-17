@@ -1,6 +1,7 @@
 %include	/usr/lib/rpm/macros.php
 %define	sname	symfony
-Summary:	open-source PHP web framework
+Summary:	Open-source PHP web framework
+Summary(pl.UTF-8):	Szkielet aplikacji WWW w PHP o otwartych źródłach
 Name:		php-%{sname}
 Version:	1.0.3
 Release:	1
@@ -33,6 +34,23 @@ such as:
 - Ajax support
 - enterprise ready
 
+%description -l pl.UTF-8
+Oparty na najlepszych praktykach tworzenia aplikacji WWW, gruntownie
+wypróbowany na kilku aktywnych serwisach moduł symfony próbuje
+przyspieszyć tworzenie i utrzymywanie aplikacji WWW oraz zastąpić
+powtarzające się zadania kodowania potęgą, kontrolą i przyjemnością.
+
+Symfony udostępnia wiele zintegrowanych w sposób przezroczysty cech,
+takich jak:
+- proste szablony i odwołania
+- zarządzanie pamięcią podręczną
+- inteligentne URL-e
+- scaffolding
+- obsługa wielojęzyczności i międzynarodowości
+- rozdzielenie modelu obiektowego i MVC
+- obsługa AJAX
+- gotowość na zastosowania enterprise
+
 %prep
 %setup  -q -n %{sname}-%{version}
 
@@ -56,5 +74,5 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_phpsharedir}/%{sname}/data
 %dir %{_phpsharedir}/%{sname}/data/bin
 %attr(755,root,root) %{_phpsharedir}/%{sname}/data/bin/*
-%{_phpsharedir}/%{sname}/data/[^b]*
+%{_phpsharedir}/%{sname}/data/[!b]*
 %{_phpsharedir}/%{sname}/lib
