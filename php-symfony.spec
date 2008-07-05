@@ -4,7 +4,7 @@ Summary:	Open-source PHP web framework
 Summary(pl.UTF-8):	Szkielet aplikacji WWW w PHP o otwartych źródłach
 Name:		php-%{sname}
 Version:	1.1.0
-Release:	1
+Release:	2
 License:	various free licenses
 Group:		Libraries
 Source0:	http://www.symfony-project.org/get/symfony-%{version}.tgz
@@ -12,11 +12,12 @@ Source0:	http://www.symfony-project.org/get/symfony-%{version}.tgz
 URL:		http://www.symfony-project.com/
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
 Requires:	php-common
+Requires:	Smarty
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-# deps already provided by this package
-%define		_noautoreq	'pear(propel/.*)' 'pear(phing/.*)' 'pear(creole/.*)' 'pear(.*SYMFONY_LIB_DIR.*)'
+# deps already provided by this package or broken deps (dir mismatches)
+%define		_noautoreq	'pear(propel/.*)' 'pear(phing/.*)' 'pear(creole/.*)' 'pear(.*SYMFONY_LIB_DIR.*)' 'pear(Smarty.class.php)' 'pear('simpletest/.*)'
 
 %define		_phpsharedir	%{_datadir}/php
 
