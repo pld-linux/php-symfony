@@ -15,6 +15,9 @@ Requires:	php-common
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+# deps already provided by this package
+%define		_noautoreq	'pear(propel/.*)' 'pear(phing/.*)' 'pear(creole/.*)' 'pear(.*SYMFONY_LIB_DIR.*)'
+
 %define		_phpsharedir	%{_datadir}/php
 
 %description
