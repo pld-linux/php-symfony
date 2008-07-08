@@ -1,5 +1,7 @@
+# TODO
+# - use system creole, propel, phing packages
+%define		sname	symfony
 %include	/usr/lib/rpm/macros.php
-%define	sname	symfony
 Summary:	Open-source PHP web framework
 Summary(pl.UTF-8):	Szkielet aplikacji WWW w PHP o otwartych źródłach
 Name:		php-%{sname}
@@ -11,8 +13,9 @@ Source0:	http://www.symfony-project.org/get/symfony-%{version}.tgz
 # Source0-md5:	cc148058e555303ed155f3141687da49
 URL:		http://www.symfony-project.com/
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
-Requires:	php-common
+BuildRequires:	rpmbuild(macros) >= 1.461
 Requires:	Smarty
+Requires:	php-common
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -58,14 +61,14 @@ takich jak:
 %prep
 %setup  -q -n %{sname}-%{version}
 
-%install
-rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_phpsharedir}/%{sname}}
-
 mv doc/LICENSE doc/LICENSE.doc
 
-cp -a data lib $RPM_BUILD_ROOT%{_phpsharedir}/%{sname}
-ln -s %{_phpsharedir}/%{sname}/data/bin/symfony $RPM_BUILD_ROOT%{_bindir}/%{sname}
+%install
+rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT{%{_bindir},%{php_data_dir}/%{sname}}
+
+cp -a data lib $RPM_BUILD_ROOT%{php_data_dir}/%{sname}
+ln -s %{php_data_dir}/%{sname}/data/bin/symfony $RPM_BUILD_ROOT%{_bindir}/%{sname}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -74,9 +77,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc doc/* licenses COPYRIGHT LICENSE README
 %attr(755,root,root) %{_bindir}/*
-%dir %{_phpsharedir}/%{sname}
-%dir %{_phpsharedir}/%{sname}/data
-%dir %{_phpsharedir}/%{sname}/data/bin
-%attr(755,root,root) %{_phpsharedir}/%{sname}/data/bin/*
-%{_phpsharedir}/%{sname}/data/[!b]*
-%{_phpsharedir}/%{sname}/lib
+%dir %{php_data_dir}/%{sname}
+%dir %{php_data_dir}/%{sname}/data
+%dir %{php_data_dir}/%{sname}/data/bin
+%attr(755,root,root) %{php_data_dir}/%{sname}/data/bin/*
+%{php_data_dir}/%{sname}/data/[!b]*
+%{php_data_dir}/%{sname}/lib
