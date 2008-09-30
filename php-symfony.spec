@@ -1,16 +1,16 @@
 # TODO
-# - use system creole, propel, phing packages
+# - use system creole, propel, phing packages (or better do not do that to avoid incompatibilities)
 %define		sname	symfony
 %include	/usr/lib/rpm/macros.php
 Summary:	Open-source PHP web framework
 Summary(pl.UTF-8):	Szkielet aplikacji WWW w PHP o otwartych źródłach
 Name:		php-%{sname}
-Version:	1.1.0
-Release:	2
+Version:	1.1.3
+Release:	1
 License:	various free licenses
 Group:		Libraries
 Source0:	http://www.symfony-project.org/get/symfony-%{version}.tgz
-# Source0-md5:	cc148058e555303ed155f3141687da49
+# Source0-md5:	2652c9696c4b73d1be9d46065e77e1c8
 URL:		http://www.symfony-project.com/
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
 BuildRequires:	rpmbuild(macros) >= 1.461
