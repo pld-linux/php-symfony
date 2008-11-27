@@ -5,12 +5,12 @@
 Summary:	Open-source PHP web framework
 Summary(pl.UTF-8):	Szkielet aplikacji WWW w PHP o otwartych źródłach
 Name:		php-%{sname}
-Version:	1.1.5
+Version:	1.1.3
 Release:	1
 License:	various free licenses
 Group:		Libraries
 Source0:	http://www.symfony-project.org/get/symfony-%{version}.tgz
-# Source0-md5:	1d38b298b9f2182077d1996edb9772a2
+# Source0-md5:	2652c9696c4b73d1be9d46065e77e1c8
 URL:		http://www.symfony-project.com/
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
 BuildRequires:	rpmbuild(macros) >= 1.461
