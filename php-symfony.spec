@@ -20,7 +20,7 @@ BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # deps already provided by this package or broken deps (dir mismatches)
-%define		_noautoreq	'pear(propel/.*)' 'pear(phing/.*)' 'pear(creole/.*)' 'pear(.*SYMFONY_LIB_DIR.*)' 'pear(Smarty.class.php)' 'pear('simpletest/.*)'
+%define		_noautoreq	'pear(propel/.*)' 'pear(phing/.*)' 'pear(creole/.*)' 'pear(.*SYMFONY_LIB_DIR.*)' 'pear(Smarty.class.php)' 'pear('simpletest/.*)' 'pear(.*/autoload/.*)'
 
 %define		_phpsharedir	%{_datadir}/php
 
