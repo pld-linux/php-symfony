@@ -1,26 +1,29 @@
 # TODO
 # - use system creole, propel, phing packages (or better do not do that to avoid incompatibilities)
+# - php deps autofinder finds a lot of crap (that's why we use manual R now), maybe there is a way to improve
 %define		sname	symfony
-%include	/usr/lib/rpm/macros.php
 Summary:	Open-source PHP web framework
 Summary(pl.UTF-8):	Szkielet aplikacji WWW w PHP o otwartych źródłach
 Name:		php-%{sname}
-Version:	1.2.0
+Version:	1.2.1
 Release:	1
 License:	various free licenses
 Group:		Libraries
 Source0:	http://www.symfony-project.org/get/symfony-%{version}.tgz
-# Source0-md5:	08f17ab5cf6ae75c96295cfb0f38e78b
+# Source0-md5:	76d88fee34788c102d49d1d44e79a0f1
 URL:		http://www.symfony-project.com/
-BuildRequires:	rpm-php-pearprov >= 4.4.2-11
 BuildRequires:	rpmbuild(macros) >= 1.461
 Requires:	Smarty
 Requires:	php-common
+Requires:	php-pear-Archive_Tar
+Requires:	php-pear-Log
+Requires:	php-pear-PEAR
+Requires:	php-pear-PEAR-core
+Requires:	php-pear-PEAR_PackageFileManager
+Requires:	php-pear-PHPUnit2
+Requires:	php-pear-VersionControl_SVN
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-# deps already provided by this package or broken deps (dir mismatches)
-%define		_noautoreq	'pear(propel/.*)' 'pear(phing/.*)' 'pear(creole/.*)' 'pear(.*SYMFONY_LIB_DIR.*)' 'pear(Smarty.class.php)' 'pear('simpletest/.*)'
 
 %define		_phpsharedir	%{_datadir}/php
 
