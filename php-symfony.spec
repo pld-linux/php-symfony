@@ -25,8 +25,6 @@ Requires:	php-pear-VersionControl_SVN
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_phpsharedir	%{_datadir}/php
-
 %description
 Based on the best practices of web development, thoroughly tried on
 several active websites, symfony aims to speed up the creation and
