@@ -5,12 +5,12 @@
 Summary:	Open-source PHP web framework
 Summary(pl.UTF-8):	Szkielet aplikacji WWW w PHP o otwartych źródłach
 Name:		php-%{sname}
-Version:	1.2.2
+Version:	1.2.4
 Release:	1
 License:	various free licenses
 Group:		Libraries
 Source0:	http://www.symfony-project.org/get/symfony-%{version}.tgz
-# Source0-md5:	94088e8f026e5d297b2ff27e8ac7a6fd
+# Source0-md5:	46113741b24c1694ca6f6db298e8586f
 URL:		http://www.symfony-project.com/
 BuildRequires:	rpmbuild(macros) >= 1.461
 Requires:	Smarty
