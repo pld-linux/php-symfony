@@ -15,6 +15,7 @@ URL:		http://www.symfony-project.com/
 BuildRequires:	rpmbuild(macros) >= 1.461
 Requires:	Smarty
 Requires:	php-common
+Requires:	php-ctype
 Requires:	php-pear-Archive_Tar
 Requires:	php-pear-Log
 Requires:	php-pear-PEAR
