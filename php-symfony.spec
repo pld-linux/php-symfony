@@ -5,12 +5,12 @@
 Summary:	Open-source PHP web framework
 Summary(pl.UTF-8):	Szkielet aplikacji WWW w PHP o otwartych źródłach
 Name:		php-%{sname}
-Version:	1.2.5
+Version:	1.4.1
 Release:	1
 License:	various free licenses
 Group:		Libraries
 Source0:	http://www.symfony-project.org/get/symfony-%{version}.tgz
-# Source0-md5:	3c11890950b752e741b12db17f2042fb
+# Source0-md5:	b80e8efe2415d388480e8aea738b12b3
 URL:		http://www.symfony-project.org/
 BuildRequires:	rpmbuild(macros) >= 1.461
 Requires:	Smarty
@@ -63,8 +63,6 @@ takich jak:
 %prep
 %setup  -q -n %{sname}-%{version}
 
-mv doc/LICENSE doc/LICENSE.doc
-
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{php_data_dir}/%{sname}}
@@ -77,7 +75,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc doc/* licenses COPYRIGHT LICENSE README
+%doc licenses COPYRIGHT LICENSE README
 %attr(755,root,root) %{_bindir}/*
 %dir %{php_data_dir}/%{sname}
 %dir %{php_data_dir}/%{sname}/data
