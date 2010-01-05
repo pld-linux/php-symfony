@@ -75,7 +75,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc licenses COPYRIGHT LICENSE README
+%doc licenses CHANGELOG COPYRIGHT LICENSE README
 %attr(755,root,root) %{_bindir}/*
 %dir %{php_data_dir}/%{sname}
 %dir %{php_data_dir}/%{sname}/data
