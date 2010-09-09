@@ -1,30 +1,37 @@
 # TODO
-# - use system creole, propel, phing packages (or better do not do that to avoid incompatibilities)
+# - use system creole, propel, phing packages (or better do not do that to avoid incompatibilities?)
 # - php deps autofinder finds a lot of crap (that's why we use manual R now), maybe there is a way to improve
-%define		sname	symfony
+%define		pkgname	symfony
+%define		php_min_version 5.2.1
+#include	/usr/lib/rpm/macros.php
 Summary:	Open-source PHP web framework
 Summary(pl.UTF-8):	Szkielet aplikacji WWW w PHP o otwartych źródłach
-Name:		php-%{sname}
-Version:	1.4.1
+Name:		php-%{pkgname}
+Version:	1.4.6
 Release:	1
 License:	various free licenses
 Group:		Libraries
 Source0:	http://www.symfony-project.org/get/symfony-%{version}.tgz
-# Source0-md5:	b80e8efe2415d388480e8aea738b12b3
+# Source0-md5:	0d17b1ef8b9e02d196fdb528c443ccd8
 URL:		http://www.symfony-project.org/
 BuildRequires:	rpmbuild(macros) >= 1.461
 Requires:	Smarty
-Requires:	php-common
+Requires:	php-common >= 4:%{php_min_version}
 Requires:	php-ctype
 Requires:	php-pear-Archive_Tar
 Requires:	php-pear-Log
-Requires:	php-pear-PEAR
 Requires:	php-pear-PEAR-core
-Requires:	php-pear-PEAR_PackageFileManager
-Requires:	php-pear-PHPUnit2
-Requires:	php-pear-VersionControl_SVN
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+# bad depsolver
+%define		_noautopear	pear(Doctrine/.* pear(PHPUnit/.*) pear(PHPUnit2/.*) pear(phing/.*) pear(propel/.*) pear(simpletest/.*)
+
+# exclude optional php dependencies
+%define		_noautophp	%{nil}
+
+# put it together for rpmbuild
+%define		_noautoreq	%{?_noautophp} %{?_noautopear}
 
 %description
 Based on the best practices of web development, thoroughly tried on
@@ -61,14 +68,14 @@ takich jak:
 - gotowość na zastosowania enterprise
 
 %prep
-%setup  -q -n %{sname}-%{version}
+%setup  -q -n %{pkgname}-%{version}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{php_data_dir}/%{sname}}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{php_data_dir}/%{pkgname}}
 
-cp -a data lib $RPM_BUILD_ROOT%{php_data_dir}/%{sname}
-ln -s %{php_data_dir}/%{sname}/data/bin/symfony $RPM_BUILD_ROOT%{_bindir}/%{sname}
+cp -a data lib $RPM_BUILD_ROOT%{php_data_dir}/%{pkgname}
+ln -s %{php_data_dir}/%{pkgname}/data/bin/symfony $RPM_BUILD_ROOT%{_bindir}/%{pkgname}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -77,9 +84,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc licenses CHANGELOG COPYRIGHT LICENSE README
 %attr(755,root,root) %{_bindir}/*
-%dir %{php_data_dir}/%{sname}
-%dir %{php_data_dir}/%{sname}/data
-%dir %{php_data_dir}/%{sname}/data/bin
-%attr(755,root,root) %{php_data_dir}/%{sname}/data/bin/*
-%{php_data_dir}/%{sname}/data/[!b]*
-%{php_data_dir}/%{sname}/lib
+%dir %{php_data_dir}/%{pkgname}
+%dir %{php_data_dir}/%{pkgname}/data
+%dir %{php_data_dir}/%{pkgname}/data/bin
+%attr(755,root,root) %{php_data_dir}/%{pkgname}/data/bin/*
+%{php_data_dir}/%{pkgname}/data/[!b]*
+%{php_data_dir}/%{pkgname}/lib
