@@ -2,17 +2,17 @@
 # - use system creole, propel, phing packages (or better do not do that to avoid incompatibilities?)
 # - php deps autofinder finds a lot of crap (that's why we use manual R now), maybe there is a way to improve
 %define		pkgname	symfony
-%define		php_min_version 5.2.1
-#include	/usr/lib/rpm/macros.php
+%define		php_min_version	5.2.4
+%include	/usr/lib/rpm/macros.php
 Summary:	Open-source PHP web framework
 Summary(pl.UTF-8):	Szkielet aplikacji WWW w PHP o otwartych źródłach
 Name:		php-%{pkgname}
-Version:	1.4.8
+Version:	1.4.11
 Release:	1
-License:	various free licenses
-Group:		Libraries
+License:	various free licenses (distributable)
+Group:		Development/Languages/PHP
 Source0:	http://www.symfony-project.org/get/symfony-%{version}.tgz
-# Source0-md5:	87f475f0bb9129f2288a204d4fdc9c32
+# Source0-md5:	179bc7c99c792313fbfe6b683da7cb7e
 URL:		http://www.symfony-project.org/
 BuildRequires:	rpmbuild(macros) >= 1.461
 Requires:	Smarty
@@ -75,7 +75,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{php_data_dir}/%{pkgname}}
 
 cp -a data lib $RPM_BUILD_ROOT%{php_data_dir}/%{pkgname}
-ln -s %{php_data_dir}/%{pkgname}/data/bin/symfony $RPM_BUILD_ROOT%{_bindir}/%{pkgname}
+ln -s %{php_data_dir}/%{pkgname}/data/bin/%{pkgname} $RPM_BUILD_ROOT%{_bindir}/%{pkgname}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
