@@ -3,7 +3,7 @@
 # - php deps autofinder finds a lot of crap (that's why we use manual R now), maybe there is a way to improve
 %define		pkgname	symfony
 %define		php_min_version	5.2.4
-%include	/usr/lib/rpm/macros.php
+#include	/usr/lib/rpm/macros.php
 Summary:	Open-source PHP web framework
 Summary(pl.UTF-8):	Szkielet aplikacji WWW w PHP o otwartych źródłach
 Name:		php-%{pkgname}
