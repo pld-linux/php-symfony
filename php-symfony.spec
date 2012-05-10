@@ -7,12 +7,12 @@
 Summary:	Open-source PHP web framework
 Summary(pl.UTF-8):	Szkielet aplikacji WWW w PHP o otwartych źródłach
 Name:		php-%{pkgname}
-Version:	1.4.11
+Version:	1.4.17
 Release:	1
 License:	various free licenses (distributable)
 Group:		Development/Languages/PHP
 Source0:	http://www.symfony-project.org/get/symfony-%{version}.tgz
-# Source0-md5:	179bc7c99c792313fbfe6b683da7cb7e
+# Source0-md5:	3a99e20c9d745976e50e31bf08879c7d
 URL:		http://www.symfony-project.org/
 BuildRequires:	rpmbuild(macros) >= 1.461
 Requires:	Smarty
