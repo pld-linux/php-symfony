@@ -8,7 +8,7 @@ Summary:	Open-source PHP web framework
 Summary(pl.UTF-8):	Szkielet aplikacji WWW w PHP o otwartych źródłach
 Name:		php-%{pkgname}
 Version:	1.4.17
-Release:	2
+Release:	3
 License:	various free licenses (distributable)
 Group:		Development/Languages/PHP
 Source0:	http://www.symfony-project.org/get/symfony-%{version}.tgz
@@ -16,8 +16,8 @@ Source0:	http://www.symfony-project.org/get/symfony-%{version}.tgz
 URL:		http://www.symfony-project.org/
 BuildRequires:	rpmbuild(macros) >= 1.461
 Requires:	Smarty
+Requires:	php(core) >= %{php_min_version}
 Requires:	php(ctype)
-Requires:	php-common >= 4:%{php_min_version}
 Requires:	php-pear-Archive_Tar
 Requires:	php-pear-Log
 Requires:	php-pear-PEAR-core
