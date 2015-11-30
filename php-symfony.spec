@@ -8,11 +8,12 @@ Summary:	Open-source PHP web framework
 Summary(pl.UTF-8):	Szkielet aplikacji WWW w PHP o otwartych źródłach
 Name:		php-%{pkgname}
 Version:	1.4.20
-Release:	1
+Release:	2
 License:	various free licenses (distributable)
 Group:		Development/Languages/PHP
 Source0:	http://www.symfony-project.org/get/symfony-%{version}.tgz
 # Source0-md5:	3c3640ffbab023a1a8f78e0cbb554c10
+Patch0:		symfony1.4_php56.patch
 URL:		http://www.symfony-project.org/
 BuildRequires:	rpmbuild(macros) >= 1.461
 Requires:	Smarty
@@ -25,7 +26,7 @@ BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # bad depsolver
-%define		_noautopear	pear(Doctrine/.* pear(PHPUnit/.*) pear(PHPUnit2/.*) pear(phing/.*) pear(propel/.*) pear(simpletest/.*)
+%define		_noautopear	pear(Doctrine/.*) pear(PHPUnit/.*) pear(PHPUnit2/.*) pear(phing/.*) pear(propel/.*) pear(simpletest/.*)
 
 # exclude optional php dependencies
 %define		_noautophp	%{nil}
@@ -69,6 +70,7 @@ takich jak:
 
 %prep
 %setup  -q -n %{pkgname}-%{version}
+%patch0 -p1
 
 %install
 rm -rf $RPM_BUILD_ROOT

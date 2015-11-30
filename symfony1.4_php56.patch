@@ -1,0 +1,128 @@
+diff -Naurp symfony/lib/command/sfCommandManager.class.php symfony_php56/lib/command/sfCommandManager.class.php
+--- symfony/lib/command/sfCommandManager.class.php	2009-09-11 14:06:21.000000000 +0200
++++ symfony_php56/lib/command/sfCommandManager.class.php	2015-11-22 12:30:53.082672339 +0100
+@@ -108,7 +108,9 @@ class sfCommandManager
+     else if (!is_array($arguments))
+     {
+       // hack to split arguments with spaces : --test="with some spaces"
+-      $arguments = preg_replace('/(\'|")(.+?)\\1/e', "str_replace(' ', '=PLACEHOLDER=', '\\2')", $arguments);
++      $arguments = preg_replace_callback('/(\'|")(.+?)\\1/', function($matches) {
++        return str_replace(' ', '=PLACEHOLDER=', $matches[2]);
++      }, $arguments);
+       $arguments = preg_split('/\s+/', $arguments);
+       $arguments = str_replace('=PLACEHOLDER=', ' ', $arguments);
+     }
+diff -Naurp symfony/lib/form/addon/sfFormObject.class.php symfony_php56/lib/form/addon/sfFormObject.class.php
+--- symfony/lib/form/addon/sfFormObject.class.php	2011-12-12 17:02:15.000000000 +0100
++++ symfony_php56/lib/form/addon/sfFormObject.class.php	2015-11-22 12:31:53.969940421 +0100
+@@ -278,6 +278,6 @@ abstract class sfFormObject extends Base
+ 
+   protected function camelize($text)
+   {
+-    return preg_replace(array('#/(.?)#e', '/(^|_|-)+(.)/e'), array("'::'.strtoupper('\\1')", "strtoupper('\\2')"), $text);
++    return sfToolkit::camelize($text);
+   }
+ }
+diff -Naurp symfony/lib/plugins/sfDoctrinePlugin/lib/form/sfFormFilterDoctrine.class.php symfony_php56/lib/plugins/sfDoctrinePlugin/lib/form/sfFormFilterDoctrine.class.php
+--- symfony/lib/plugins/sfDoctrinePlugin/lib/form/sfFormFilterDoctrine.class.php	2011-10-24 09:57:16.000000000 +0200
++++ symfony_php56/lib/plugins/sfDoctrinePlugin/lib/form/sfFormFilterDoctrine.class.php	2015-11-22 12:32:59.483942091 +0100
+@@ -323,7 +323,7 @@ abstract class sfFormFilterDoctrine exte
+ 
+   protected function camelize($text)
+   {
+-    return sfToolkit::pregtr($text, array('#/(.?)#e' => "'::'.strtoupper('\\1')", '/(^|_|-)+(.)/e' => "strtoupper('\\2')"));
++    return sfToolkit::camelize($text);
+   }
+ 
+   protected function getTable()
+diff -Naurp symfony/lib/plugins/sfPropelPlugin/lib/vendor/phing/system/io/FileSystem.php symfony_php56/lib/plugins/sfPropelPlugin/lib/vendor/phing/system/io/FileSystem.php
+--- symfony/lib/plugins/sfPropelPlugin/lib/vendor/phing/system/io/FileSystem.php	2008-03-08 11:07:53.000000000 +0100
++++ symfony_php56/lib/plugins/sfPropelPlugin/lib/vendor/phing/system/io/FileSystem.php	2015-11-22 12:28:32.954707609 +0100
+@@ -150,7 +150,7 @@ abstract class FileSystem {
+      * by the given abstract pathname, or zero if it does not exist or some
+      * other I/O error occurs.
+      */
+-    function getBooleanAttributes($f) {
++    function getBooleanAttributes(&$f) {
+         throw new Exception("SYSTEM ERROR method getBooleanAttributes() not implemented by fs driver");
+     }
+ 
+diff -Naurp symfony/lib/plugins/sfPropelPlugin/lib/vendor/propel-generator/classes/propel/engine/platform/MysqlPlatform.php symfony_php56/lib/plugins/sfPropelPlugin/lib/vendor/propel-generator/classes/propel/engine/platform/MysqlPlatform.php
+--- symfony/lib/plugins/sfPropelPlugin/lib/vendor/propel-generator/classes/propel/engine/platform/MysqlPlatform.php	2009-10-26 21:54:39.000000000 +0100
++++ symfony_php56/lib/plugins/sfPropelPlugin/lib/vendor/propel-generator/classes/propel/engine/platform/MysqlPlatform.php	2015-11-24 12:21:49.150937486 +0100
+@@ -95,7 +95,7 @@ class MysqlPlatform extends DefaultPlatf
+ 	public function disconnectedEscapeText($text)
+ 	{
+ 		if (function_exists('mysql_escape_string')) {
+-			return mysql_escape_string($text);
++			return @mysql_escape_string($text);
+ 		} else {
+ 			return addslashes($text);
+ 		}
+diff -Naurp symfony/lib/plugins/sfPropelPlugin/lib/vendor/propel-generator/classes/propel/phing/AbstractPropelDataModelTask.php symfony_php56/lib/plugins/sfPropelPlugin/lib/vendor/propel-generator/classes/propel/phing/AbstractPropelDataModelTask.php
+--- symfony/lib/plugins/sfPropelPlugin/lib/vendor/propel-generator/classes/propel/phing/AbstractPropelDataModelTask.php	2010-04-16 22:56:45.000000000 +0200
++++ symfony_php56/lib/plugins/sfPropelPlugin/lib/vendor/propel-generator/classes/propel/phing/AbstractPropelDataModelTask.php	2015-11-22 12:28:32.954707609 +0100
+@@ -438,8 +438,10 @@ abstract class AbstractPropelDataModelTa
+ 						$this->includeExternalSchemas($dom, $srcDir);
+ 						// normalize the document using normalizer stylesheet
+ 
++						$xslDom = new DomDocument();
++						$xslDom->load($this->xslFile->getAbsolutePath());
+ 						$xsl = new XsltProcessor();
+-						$xsl->importStyleSheet(DomDocument::load($this->xslFile->getAbsolutePath()));
++						$xsl->importStyleSheet($xslDom);
+ 						$transformed = $xsl->transformToDoc($dom);
+ 						$newXmlFilename = substr($xmlFile->getName(), 0, strrpos($xmlFile->getName(), '.')) . '-transformed.xml';
+ 
+diff -Naurp symfony/lib/response/sfWebResponse.class.php symfony_php56/lib/response/sfWebResponse.class.php
+--- symfony/lib/response/sfWebResponse.class.php	2010-11-15 17:48:22.000000000 +0100
++++ symfony_php56/lib/response/sfWebResponse.class.php	2015-11-22 12:35:47.569073451 +0100
+@@ -406,7 +406,10 @@ class sfWebResponse extends sfResponse
+    */
+   protected function normalizeHeaderName($name)
+   {
+-    return preg_replace('/\-(.)/e', "'-'.strtoupper('\\1')", strtr(ucfirst(strtolower($name)), '_', '-'));
++    return preg_replace_callback('/\-(.)/', function ($matches) { 
++         return '-'.strtoupper($matches[1]); 
++       }, strtr(ucfirst(strtolower($name)), '_', '-')
++    );
+   }
+ 
+   /**
+diff -Naurp symfony/lib/util/sfInflector.class.php symfony_php56/lib/util/sfInflector.class.php
+--- symfony/lib/util/sfInflector.class.php	2009-11-12 12:07:44.000000000 +0100
++++ symfony_php56/lib/util/sfInflector.class.php	2015-11-22 12:37:57.093857056 +0100
+@@ -27,11 +27,7 @@ class sfInflector
+    */
+   public static function camelize($lower_case_and_underscored_word)
+   {
+-    $tmp = $lower_case_and_underscored_word;
+-    $tmp = sfToolkit::pregtr($tmp, array('#/(.?)#e'    => "'::'.strtoupper('\\1')",
+-                                         '/(^|_|-)+(.)/e' => "strtoupper('\\2')"));
+-
+-    return $tmp;
++    return sfToolkit::camelize($lower_case_and_underscored_word);
+   }
+ 
+   /**
+diff -Naurp symfony/lib/util/sfToolkit.class.php symfony_php56/lib/util/sfToolkit.class.php
+--- symfony/lib/util/sfToolkit.class.php	2010-05-19 15:01:43.000000000 +0200
++++ symfony_php56/lib/util/sfToolkit.class.php	2015-11-22 12:40:22.655537197 +0100
+@@ -608,4 +608,17 @@ class sfToolkit
+ 
+     return set_include_path(join(PATH_SEPARATOR, $paths));
+   }
++
++  public static function camelize($text)
++  {
++    if (preg_match('#/(.?)#', $text, $matches))
++    {
++      $text = str_replace($matches[0], '::'.strtoupper($matches[1]), $text);
++    }
++    if (preg_match('/(^|_|-)+(.)/', $text, $matches))
++    {
++      $text = str_replace($matches[0], strtoupper($matches[2]), $text);
++    }
++    return $text;
++  }
+ }
