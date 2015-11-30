@@ -15,7 +15,7 @@ Source0:	http://www.symfony-project.org/get/symfony-%{version}.tgz
 # Source0-md5:	3c3640ffbab023a1a8f78e0cbb554c10
 Patch0:		symfony1.4_php56.patch
 URL:		http://www.symfony-project.org/
-BuildRequires:	rpmbuild(macros) >= 1.461
+BuildRequires:	rpmbuild(macros) >= 1.654
 Requires:	Smarty
 Requires:	php(core) >= %{php_min_version}
 Requires:	php(ctype)
@@ -25,14 +25,7 @@ Requires:	php-pear-PEAR-core
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-# bad depsolver
-%define		_noautopear	pear(Doctrine/.*) pear(PHPUnit/.*) pear(PHPUnit2/.*) pear(phing/.*) pear(propel/.*) pear(simpletest/.*)
-
-# exclude optional php dependencies
-%define		_noautophp	%{nil}
-
-# put it together for rpmbuild
-%define		_noautoreq	%{?_noautophp} %{?_noautopear}
+%define		_noautoreq_pear Doctrine/.* PHPUnit/.* PHPUnit2/.* phing/.* propel/.* simpletest/.*
 
 %description
 Based on the best practices of web development, thoroughly tried on
