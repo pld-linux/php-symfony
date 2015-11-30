@@ -14,7 +14,7 @@ Group:		Development/Languages/PHP
 Source0:	http://www.symfony-project.org/get/symfony-%{version}.tgz
 # Source0-md5:	3c3640ffbab023a1a8f78e0cbb554c10
 Patch0:		symfony1.4_php56.patch
-URL:		http://www.symfony-project.org/
+URL:		http://symfony.com/legacy
 BuildRequires:	rpmbuild(macros) >= 1.654
 Requires:	Smarty
 Requires:	php(core) >= %{php_min_version}
