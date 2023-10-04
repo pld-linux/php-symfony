@@ -1,0 +1,45 @@
+diff -urN symfony-1.4.20.org/data/bin/symfony symfony-1.4.20/data/bin/symfony
+--- symfony-1.4.20.org/data/bin/symfony	2008-11-26 21:28:26.000000000 +0100
++++ symfony-1.4.20/data/bin/symfony	2023-10-04 14:35:36.873288358 +0200
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env php
++#!/usr/bin/php
+ <?php
+ 
+ /*
+diff -urN symfony-1.4.20.org/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/symfony symfony-1.4.20/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/symfony
+--- symfony-1.4.20.org/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/symfony	2008-10-05 09:45:47.000000000 +0200
++++ symfony-1.4.20/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/symfony	2023-10-04 14:35:36.873288358 +0200
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env php
++#!/usr/bin/php
+ <?php
+ 
+ /*
+diff -urN symfony-1.4.20.org/lib/plugins/sfPropelPlugin/test/functional/fixtures/symfony symfony-1.4.20/lib/plugins/sfPropelPlugin/test/functional/fixtures/symfony
+--- symfony-1.4.20.org/lib/plugins/sfPropelPlugin/test/functional/fixtures/symfony	2008-04-01 23:33:35.000000000 +0200
++++ symfony-1.4.20/lib/plugins/sfPropelPlugin/test/functional/fixtures/symfony	2023-10-04 14:35:36.873288358 +0200
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env php
++#!/usr/bin/php
+ <?php
+ 
+ /*
+diff -urN symfony-1.4.20.org/lib/task/generator/skeleton/project/symfony symfony-1.4.20/lib/task/generator/skeleton/project/symfony
+--- symfony-1.4.20.org/lib/task/generator/skeleton/project/symfony	2008-11-27 19:10:40.000000000 +0100
++++ symfony-1.4.20/lib/task/generator/skeleton/project/symfony	2023-10-04 14:35:36.873288358 +0200
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env php
++#!/usr/bin/php
+ <?php
+ 
+ /*
+diff -urN symfony-1.4.20.org/test/functional/fixtures/symfony symfony-1.4.20/test/functional/fixtures/symfony
+--- symfony-1.4.20.org/test/functional/fixtures/symfony	2009-04-04 16:00:15.000000000 +0200
++++ symfony-1.4.20/test/functional/fixtures/symfony	2023-10-04 14:35:36.873288358 +0200
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env php
++#!/usr/bin/php
+ <?php
+ 
+ /*

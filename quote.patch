@@ -1,0 +1,40 @@
+--- a/lib/plugins/sfPropelPlugin/lib/vendor/propel/util/BasePeer.php	2010-03-16 00:09:22.000000000 +0100
++++ b/lib/plugins/sfPropelPlugin/lib/vendor/propel/util/BasePeer.php	2018-09-27 10:01:01.966687223 +0200
+@@ -353,8 +353,13 @@
+ 
+ 			$stmt = null;
+ 			try {
+-
+-				$sql = "UPDATE " . $tableName . " SET ";
++				$sql = "UPDATE ";
++                                if ($db->useQuoteIdentifier()) {
++                                        $sql .= $db->quoteIdentifierTable($tableName);
++                                } else {
++                                        $sql .= $tableName;
++                                }
++                                $sql .= " SET ";
+ 				$p = 1;
+ 				foreach ($updateTablesColumns[$tableName] as $col) {
+ 					$updateColumnName = substr($col, strrpos($col, '.') + 1);
+@@ -886,7 +891,11 @@
+ 					$condition .= ' AND ';
+ 				}
+ 			}
+-
++			if ($db->useQuoteIdentifier()) {
++				$_rightTable = $db->quoteIdentifierTable($rightTable);
++			} else {
++				$_rightTable = $rightTable;
++			}
+ 			// add 'em to the queues..
+ 			if ($joinType = $join->getJoinType()) {
+ 			  // real join
+@@ -894,7 +903,7 @@
+ 					$fromClause[] = $leftTable . $leftTableAlias;
+ 				}
+ 				$joinTables[] = $rightTable . $rightTableAlias;
+-				$joinClause[] = $join->getJoinType() . ' ' . $rightTable . $rightTableAlias . " ON ($condition)";
++				$joinClause[] = $join->getJoinType() . ' ' . $_rightTable . $rightTableAlias . " ON ($condition)";
+ 			} else {
+ 			  // implicit join, translates to a where
+ 				$fromClause[] = $leftTable . $leftTableAlias;
