@@ -8,7 +8,7 @@ Summary:	Open-source PHP web framework
 Summary(pl.UTF-8):	Szkielet aplikacji WWW w PHP o otwartych źródłach
 Name:		php-%{pkgname}
 Version:	1.4.20
-Release:	3
+Release:	4
 License:	various free licenses (distributable)
 Group:		Development/Languages/PHP
 Source0:	http://www.symfony-project.org/get/symfony-%{version}.tgz
