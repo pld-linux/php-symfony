@@ -8,7 +8,7 @@ Summary:	Open-source PHP web framework
 Summary(pl.UTF-8):	Szkielet aplikacji WWW w PHP o otwartych źródłach
 Name:		php-%{pkgname}
 Version:	1.4.20
-Release:	5
+Release:	6
 License:	various free licenses (distributable)
 Group:		Development/Languages/PHP
 Source0:	http://www.symfony-project.org/get/symfony-%{version}.tgz
@@ -16,6 +16,7 @@ Source0:	http://www.symfony-project.org/get/symfony-%{version}.tgz
 Patch0:		symfony1.4_php56.patch
 Patch1:         quote.patch
 Patch2:         path.patch
+Patch3:		xml.patch
 URL:		http://symfony.com/legacy
 BuildRequires:	rpmbuild(macros) >= 1.654
 Requires:	Smarty
@@ -68,6 +69,7 @@ takich jak:
 %patch -P0 -p1
 %patch -P1 -p1
 %patch -P2 -p1
+%patch -P3 -p1
 
 %install
 rm -rf $RPM_BUILD_ROOT
